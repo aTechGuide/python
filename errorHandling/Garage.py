@@ -27,13 +27,23 @@ class Garage:
 ford = Garage()
 fiesta = Car('Ford','Fiesta')
 
+# Try-except-finally
 try:
   ford.add_car(fiesta)
 except TypeError:
   print('Your car was not a Car')
 except ValueError:
   print('Your car was not a Car')
+  raise # Bubbling up the error
 finally:
-  print(f"Finally block always runs. Garage now has {len(ford)} cars")
+  print(f"Finally block always runs except we 'raise' exception again. Garage now has {len(ford)} cars")
+
+# Try-except-else
+try:
+  ford.add_car(fiesta)
+except TypeError:
+  print('Your car was not a Car')
+else:
+  print(f"Else block runs when error does NOT happen. Garage now has {len(ford)} cars")
 
 print(len(ford))
