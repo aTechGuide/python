@@ -25,6 +25,15 @@ class Garage:
     self.cars.append(car)
 
 ford = Garage()
-ford.add_car(Car('Ford','Fiesta'))
+fiesta = Car('Ford','Fiesta')
+
+try:
+  ford.add_car(fiesta)
+except TypeError:
+  print('Your car was not a Car')
+except ValueError:
+  print('Your car was not a Car')
+finally:
+  print(f"Finally block always runs. Garage now has {len(ford)} cars")
 
 print(len(ford))
