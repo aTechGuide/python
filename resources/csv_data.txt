@@ -1,0 +1,3 @@
+name,age,university,degree
+kamran,25,nitb,maths
+ali,21,nitb,IT
