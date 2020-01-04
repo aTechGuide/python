@@ -18,7 +18,7 @@ print(Student.average(student_one))
 
 print(student_one.__class__)
 
-# Objects are conceptualizations of entities in our programme
 """
+- Objects are conceptualizations of entities in our programme
 - Everything is an object in Python. e.g. list, str etc
 """
