@@ -1,6 +1,7 @@
 {
   "python.pythonPath": "/Users/bornshrewd/opt/anaconda3/envs/python37/bin/python",
   "terminal.integrated.inheritEnv": false,
-  "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true
+  "python.linting.pylintEnabled": false,
+  "python.linting.enabled": true,
+  "python.linting.mypyEnabled": true
 }
