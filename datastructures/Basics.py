@@ -45,3 +45,68 @@ print(alma_maters_dd['Anne'])
 # if we wanted to raise an error or potentially print out none when you try to access something that doesn't exist,
 alma_maters_dd.default_factory = None
 # print(alma_maters_dd['Kamran']) # Prints "KeyError: 'Kamran'"
+
+
+
+"""
+Ordered Dict
+- Keeps the order in which they were inserted
+"""
+from collections import OrderedDict
+
+o = OrderedDict()
+o['Rolf'] = 6
+o['Jose'] = 12
+o['Jen'] = 2
+
+print(o)
+o.move_to_end('Rolf')
+o.move_to_end('Jose', last=False)
+o.popitem() # Pops last item
+
+
+"""
+Named Tuple
+- It is another object that we can use just like a tuple, but each of the elements has a name and in addition, 
+- The tuple itself also has a name. 
+
+So it improves on tuples by making things a bit more explicit.
+"""
+from collections import namedtuple
+
+account = ('checking', 1850.90)
+
+Account = namedtuple('Account', ['name', 'balance'])
+
+# We've used named tuple instance to create a new instance of this type account.
+account1 = Account('checking', 1850.90)
+print(account1.name)
+print(account1)
+
+account2 = Account('checking', balance = 1850.90)
+
+# Given a tuple, we can have an account named tuple
+accountNamedTuple1 = Account._make(account)
+
+# OR
+accountNamedTuple2 = Account(*account)
+
+print(accountNamedTuple1._asdict())
+
+
+"""
+deque
+- We use it instead of a list, because its efficiency, 
+- It's thread safe.
+"""
+
+from collections import deque
+
+friends = deque(('Kamran', 'Palash', 'Mayank'))
+friends.append('TP')
+
+friends.appendleft('CJ')
+friends.pop()
+friends.popleft()
+
+print(friends)
