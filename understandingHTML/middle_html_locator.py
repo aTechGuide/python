@@ -33,30 +33,48 @@ ITEM_HTML = '''<html><head></head><body>
 '''
 
 
-soup = BeautifulSoup(ITEM_HTML, 'html.parser')
-
-def find_item_name():
-    locator = 'article.product_pod h3 a' # CSS locator
-    item_link = soup.select_one(locator)
-    item_name = item_link.attrs['title']
-    print(item_name)
-
-
-def find_item_price():
-    locator = 'article.product_pod p.price_color'
-    item_price = soup.select_one(locator).string
-    matches = re.findall("[0-9\.]*", item_price)
-    print(float(matches[1]))
+class ParsedItemLocators:
+    """
+    Locators for an item in HTML Page
+    """
+    NAME_LOCATOR = 'article.product_pod h3 a'
+    PRICE_LOCATOR = 'article.product_pod p.price_color'
+    RATING_LOCATOR = 'article.product_pod p.star-rating'
 
 
-def find_item_price():
-    locator = 'article.product_pod p.star-rating'
-    star_rating_classes = soup.select_one(locator).attrs['class']
-    #rating_classes = [r for r in star_rating_classes if r != 'star-rating']
-    rating_classes = filter(lambda x: x != 'star-rating', star_rating_classes)
-    print(next(rating_classes))
+class ParsedItem:
+    """
+    Take an HTML page and find properties of an item in it
+    """
+
+    def __init__(self, page):
+        self.soup = BeautifulSoup(page, 'html.parser')
+
+    @property
+    def name(self):
+        locator = ParsedItemLocators.NAME_LOCATOR
+        item_link = self.soup.select_one(locator)
+        item_name = item_link.attrs['title']
+        return item_name
+
+    @property
+    def price(self):
+        locator = ParsedItemLocators.PRICE_LOCATOR
+        item_price = self.soup.select_one(locator).string
+        matches = re.findall("[0-9\.]*", item_price)
+        return  float(matches[1])
+
+    @property
+    def rating(self):
+        locator = ParsedItemLocators.RATING_LOCATOR
+        star_rating_classes = self.soup.select_one(locator).attrs['class']
+        # rating_classes = [r for r in star_rating_classes if r != 'star-rating']
+        rating_classes = filter(lambda x: x != 'star-rating', star_rating_classes)
+        return next(rating_classes)
 
 
+item = ParsedItem(ITEM_HTML)
 
-find_item_name()
-find_item_price()
+print(item.name)
+print(item.price)
+print(item.rating)
