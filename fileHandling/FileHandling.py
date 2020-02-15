@@ -1,3 +1,5 @@
+import os
+print(os.path.abspath(os.curdir))
 
 # Reading From file
 def readFile(path):
@@ -23,7 +25,7 @@ def read_csv(path):
 
 #print(readFile("resources/data.txt"))
 
-lines = read_csv("resources/csv_data.txt")
+lines = read_csv("../resources/csv_data.txt")
 lines = [line.strip() for line in lines[1:]]
 
 for line in lines:
